@@ -160,7 +160,7 @@ public class Minesweeper {
 	 */
 	private int[][] _values; 
 
-
+	// Hello world !
 	private int _numRows;
 	private int _numColumns;
 	private int _numMines;
