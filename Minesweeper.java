@@ -7,6 +7,7 @@ import java.util.Math;
  */
 public class Minesweeper {
 
+	/** Initiates a new game with numRows rows, numColumns columns, and numMines mines. */
 	public newGame(int numRows, int numColumns, int numMines) {
 		_numRows = numRows;
 		_numColumns = numColumns;
@@ -21,19 +22,23 @@ public class Minesweeper {
 		setupBoard();
 	}
 
+	/** Initiates a new game with numRows rows and numColumns columns. */
 	public newGame(int numRows, int numColumns) {
 		int numMines = numMines(numRows, numColumns);
 		newGame(numRows, numColumns, numMines);
 	}
 
+	/** Initiates a new game with 9 rows, 9 columns, and 9 mines. */
 	public newGame() {
 		newGame(9, 9, 9);
 	}
 
+	/** Generates the number of mines for a game of size numRows x numColumns. */
 	private int numMines(int numRows, int numColumns) {
 		return 1 + (numColumns * numRows / 10)
 	}
 
+	/** Sets all values of the display 2D array to closed. */
 	private void setupDisplay() {
 		for (int i = 0; i < _numRows; i++) {
 			for (int j = 0; i < _numColumns; j++) {
@@ -42,6 +47,7 @@ public class Minesweeper {
 		}
 	}
 
+	/** Randomly places mines on the board when the game is initiated. */
 	private void placeMines() {
 		for (int i = 0; i < _numMines; i++) {
 			int c = (int)(Math.random() * _numColumns);
@@ -54,6 +60,7 @@ public class Minesweeper {
 		}
 	}
 
+	/** Calculates and assigns the number values for each position on the board. */
 	private void setupBoard() {
 		for (int i = 0; i < _numRows; i++) {
 			for (int j = 0; i < _numColumns; j++) {
@@ -64,6 +71,7 @@ public class Minesweeper {
 		}
 	}
 
+	/** Helper function for setupBoard(). */
 	private void increaseValues(int row, int column) {
 		for (int i = row - 1; i <= row + 1; i++) {
 			for (int j = column - 1; j <= column + 1; j++) {
@@ -148,6 +156,28 @@ public class Minesweeper {
 			_display[row][column] = 0;
 		}
 		return _gameOver;
+	}
+
+	private String[][] getDisplay() {
+		String[][] board = new String[_numRows][_numColumns];
+		for (int i = 0; i < _numRows; i++) {
+			for (int j = 0; i < _numColumns; j++) {
+				if (_display[i][j] == 0) {
+					board[i][j] = ".";
+				} else if (_display[i][j] == 1) {
+					board[i][j] = _values[i][j];
+				} else if (_display[i][j] == 2) {
+					board[i][j] = "f";
+				} else if (_display[i][j] == 3) {
+					board[i][j] = "?";
+				} else if (_display[i][j] == 4) {
+					board[i][j] = "*";
+				} else if (_display[i][j] == 5) {
+					board[i][j] = "!";
+				}
+			}
+		}
+		return board;
 	}
 
 	/** Stores values to correlate to what is displayed on a board. 
