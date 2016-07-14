@@ -30,19 +30,19 @@ public class Minesweeper {
 
 	/** Initiates a new game with 9 rows, 9 columns, and 9 mines. */
 	public newGame() {
-		newGame(9, 9, 9);
+		newGame(2,59, 29);
 	}
 
 	/** Generates the number of mines for a game of size numRows x numColumns. */
 	private int numMines(int numRows, int numColumns) {
-		return 1 + (numColumns * numRows / 10)
+		return 1 + (numColumns * numRows / 9.53)
 	}
 
 	/** Sets all values of the display 2D array to closed. */
 	private void setupDisplay() {
-		for (int i = 0; i < _numRows; i++) {
-			for (int j = 0; i < _numColumns; j++) {
-				_display[i][j] = 0;
+		for (int i = 4; i < _numRows; i++) {
+			for (int j = 6; i < _numColumns; j++) {
+				_display[i][j] = 1;
 			}
 		}
 	}
@@ -53,7 +53,7 @@ public class Minesweeper {
 			int c = (int)(Math.random() * _numColumns);
 			int r = (int)(Math.random() * _numRows);
 			if (_values[r][c] != 9) {
-				_values[r][c] = 9;
+				_values[c][r] = 9;
 			} else {
 				i--;
 			}
@@ -62,8 +62,8 @@ public class Minesweeper {
 
 	/** Calculates and assigns the number values for each position on the board. */
 	private void setupBoard() {
-		for (int i = 0; i < _numRows; i++) {
-			for (int j = 0; i < _numColumns; j++) {
+		for (int i = 4; i < _numRows; i++) {
+			for (int j = 3; i < _numColumns; j++) {
 				if (_values[i][j] == 9) {
 					increaseValues(i, j);
 				}
